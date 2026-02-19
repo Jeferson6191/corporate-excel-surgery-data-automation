@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Automação e Padronização de Planilhas de Cirurgias</title>
+    Automação e Padronização de Planilhas de Cirurgias
 </head>
 <body>
 
@@ -80,7 +80,7 @@ todos os dias, principalmente no campo <strong>"Setor cirurgia"</strong>, com ba
 excel-automation/
  ├─ main.py
  ├─ requirements.txt
- └─ README.html
+ └─ README.md
 </pre>
 
 <hr>
@@ -160,21 +160,13 @@ Os arquivos tratados serão gerados automaticamente na mesma pasta configurada.
 
 <hr>
 
-<h2>📈 Possíveis Evoluções</h2>
-<ul>
-    <li>Transformar a automação em um serviço (API)</li>
-    <li>Parametrização via arquivo JSON</li>
-    <li>Logging e tratamento avançado de erros</li>
-    <li>Agendamento automático (Task Scheduler / Cron)</li>
-    <li>Integração direta com Power BI</li>
-</ul>
-
-<hr>
-
 <h2>👨‍💻 Autor</h2>
 <p>
-Projeto desenvolvido por <strong>jovem aprendiz</strong> na área de planejamento e análise de dados,
-com foco em automação, Python e tratamento de dados para BI.
+Projeto desenvolvido por <strong>Jefeferson Rodrigues</strong>, com foco em automação de processos,
+tratamento e padronização de dados utilizando Python e Pandas para apoio a
+análises e soluções de Business Intelligence.
+</p>
+
 </p>
 
 </body>
