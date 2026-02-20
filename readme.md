@@ -24,7 +24,8 @@ garantindo consistência nos dados para posterior consumo em uma base analítica
 </p>
 
 <p>
-<strong>Projeto desenvolvido em contexto corporativo real</strong>, adaptado para fins de portfólio,
+O projeto trata dados de múltiplas unidades hospitalares, com regras específicas para cada uma,
+incluindo subprocesso adicional para ajustes de colunas e setores. <strong>Projeto desenvolvido em contexto corporativo real</strong>, adaptado para fins de portfólio,
 sem exposição de dados sensíveis.
 </p>
 
@@ -41,7 +42,7 @@ todos os dias, principalmente no campo <strong>"Setor cirurgia"</strong>, com ba
     <li>Status do procedimento</li>
     <li>Procedimentos obstétricos (parto / cesariana)</li>
     <li>Setores cirúrgicos específicos (Centro Obstétrico, Centro Cirúrgico, Hemodinâmica)</li>
-    <li>Regras diferentes dependendo da unidade hospitalar</li>
+    <li>Regras diferentes dependendo da unidade hospitalar (HSH, HSL, DFStar, HCBR)</li>
 </ul>
 
 <p>Esse processo manual era:</p>
@@ -56,11 +57,12 @@ todos os dias, principalmente no campo <strong>"Setor cirurgia"</strong>, com ba
 
 <h2>🎯 Objetivo da Automação</h2>
 <ul>
-    <li>Padronizar automaticamente o campo <strong>Setor cirurgia</strong></li>
-    <li>Aplicar regras de negócio diferentes por arquivo/unidade</li>
+    <li>Padronizar automaticamente o campo <strong>Setor cirurgia</strong> por unidade hospitalar</li>
+    <li>Aplicar regras de negócio específicas para cada arquivo/unidade</li>
     <li>Filtrar procedimentos com base em critérios clínicos</li>
     <li>Remover colunas desnecessárias</li>
     <li>Gerar arquivos finais prontos para integração com Power BI</li>
+    <li>Executar subprocesso adicional para ajustes complementares e reordenação de colunas</li>
 </ul>
 
 <hr>
@@ -71,6 +73,7 @@ todos os dias, principalmente no campo <strong>"Setor cirurgia"</strong>, com ba
     <li>Pandas</li>
     <li>Excel (.xlsx)</li>
     <li>OS / Pathlib</li>
+    <li>Subprocess (execução de scripts complementares)</li>
 </ul>
 
 <hr>
@@ -78,7 +81,8 @@ todos os dias, principalmente no campo <strong>"Setor cirurgia"</strong>, com ba
 <h2>📂 Estrutura do Projeto</h2>
 <pre>
 excel-automation/
- ├─ main.py
+ ├─ main.py            # Script principal: aplica filtros e padronizações
+ ├─ automacao4260.py    # Subprocesso: ajustes complementares e reordenação de colunas
  ├─ requirements.txt
  └─ README.md
 </pre>
@@ -106,7 +110,7 @@ redirecionadas para <strong>Centro Cirúrgico</strong>.
 <h3>3️⃣ Hemodinâmica</h3>
 <p>
 Cirurgias cujo setor inicia com <code>Hemodin</code> são padronizadas como
-<strong>Hemodinâmica</strong>, quando aplicável à unidade hospitalar.
+<strong>Hemodinâmica</strong> quando aplicável à unidade hospitalar.
 </p>
 
 <h3>4️⃣ Outros Setores</h3>
@@ -115,15 +119,24 @@ Registros que não se enquadram nos setores esperados são ajustados automaticam
 para evitar inconsistências na base analítica.
 </p>
 
+<h3>5️⃣ Regras por Unidade Hospitalar</h3>
+<ul>
+    <li><strong>HSH</strong>: ajuste de Hemodinâmica e Centro Cirúrgico específico</li>
+    <li><strong>HSL</strong>: ajuste de Centro Cirúrgico e Centro Obstétrico</li>
+    <li><strong>DFStar</strong>: padronização de "RPA Centro Cirúrgico" para Centro Cirúrgico</li>
+    <li><strong>HCBR</strong>: padronização de "RPA Hemodinâmica" para Hemodinâmica - CIC</li>
+</ul>
+
 <hr>
 
 <h2>🔄 Fluxo de Processamento</h2>
 <ol>
     <li>Leitura dos arquivos Excel</li>
-    <li>Aplicação de filtros com Pandas</li>
-    <li>Padronização do campo Setor cirurgia</li>
+    <li>Aplicação de filtros com Pandas (tipo, status, procedimento, setor)</li>
+    <li>Padronização do campo Setor cirurgia por unidade</li>
     <li>Remoção de colunas irrelevantes</li>
     <li>Geração de novos arquivos tratados (<code>T_nome_do_arquivo.xlsx</code>)</li>
+    <li>Execução do subprocesso para ajustes complementares e reordenação de colunas</li>
 </ol>
 
 <hr>
@@ -146,7 +159,8 @@ python main.py
 </pre>
 
 <p>
-Os arquivos tratados serão gerados automaticamente na mesma pasta configurada.
+Os arquivos tratados serão gerados automaticamente na mesma pasta configurada,
+incluindo os ajustes do subprocesso.
 </p>
 
 <hr>
@@ -162,11 +176,9 @@ Os arquivos tratados serão gerados automaticamente na mesma pasta configurada.
 
 <h2>👨‍💻 Autor</h2>
 <p>
-Projeto desenvolvido por <strong>Jefeferson Rodrigues</strong>, com foco em automação de processos,
+Projeto desenvolvido por <strong>Jeferson Rodrigues</strong>, com foco em automação de processos,
 tratamento e padronização de dados utilizando Python e Pandas para apoio a
 análises e soluções de Business Intelligence.
-</p>
-
 </p>
 
 </body>
